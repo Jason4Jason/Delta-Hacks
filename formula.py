@@ -80,7 +80,7 @@ FOOD_ABBR = {
     "TEA": "tea",
 }
 
-IMAGE_PATH = r"C:\Users\Marcus\Downloads\100Rec.jpeg"
+IMAGE_PATH = r"C:\Users\Marcus\Documents\GitHub\Delta-Hacks\100Rec.jpeg"
 
 url = "https://api.ocr.space/parse/image"
 
