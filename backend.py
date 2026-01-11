@@ -1,19 +1,14 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
+from formula import main
 
-app = Flask(__name__)
+app = Flask("Carbon Emission Calculator")
+CORS(app)
 
-@app.route("/", methods=["GET"])
-def health_check():
-    return jsonify({"status": "backend running"})
-
-@app.route("/ping", methods=["GET"])
-def ping():
-    return jsonify({"message": "pong"})
-
-@app.route("/echo", methods=["POST"])
-def echo():
+@app.route("/api/calc/carbon emission", methods=["POST"])
+def carbon_emission():
     data = request.json
-    return jsonify(data)
+    carbon = main(data['IMAGE PATH'])
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(port=5000, debug=True)
