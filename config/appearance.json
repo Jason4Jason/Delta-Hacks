@@ -9,7 +9,7 @@
   },
   "branding": {
     "appName": "Carbon Emission Chat Bot",
-    "appTitle": "Carbon Emission Chat Bot",
+    "appTitle": "Carbon Emission Calculator",
     "storagePrefix": "carbon-emission-chat-bot-chat",
     "exportPrefix": "CarbonEmissionChatBot",
     "logo": "/assets/logo.png"
