@@ -1,6 +1,12 @@
 import requests
 import re
-def main(IMAGE_PATH):
+import os
+
+def analyze_receipt_image(IMAGE_PATH):
+    """
+    Analyze a receipt image using OCR and return CO2 data for food items.
+    Returns: List of [food_name, co2_value] pairs
+    """
     API_KEY = "K82519318188957" #TODO obscure w/ a hash and decode on runtime
     FOOD_ABBR = {
         "APPL": "apple",
@@ -122,7 +128,10 @@ def main(IMAGE_PATH):
             if current_abr in parsed[i]:
                 parsed[i]=parsed[i].replace(current_abr,FOOD_ABBR[current_abr])
     #print(parsed)
-    food_file = open("food price FINAL(food price FINAL).csv", 'r')
+    # Get the directory where this script is located
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    csv_path = os.path.join(script_dir, "food price FINAL(food price FINAL).csv")
+    food_file = open(csv_path, 'r')
     food_list = []
     for food in food_file:
         current_food = food.strip().split(",")
