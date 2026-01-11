@@ -1,150 +1,140 @@
 import requests
 import re
-API_KEY = "K82519318188957" #TODO obscure w/ a hash and decode on runtime
-FOOD_ABBR = {
-    "APPL": "apple",
-    "APL": "apple",
-    "BANA": "banana",
-    "BNA": "banana",
-    "ORNG": "orange",
-    "GRAP": "grapes",
-    "STRWB": "strawberry",
-    "BLUBRY": "blueberries",
-    "LMN": "lemon",
-    "LIME": "lime",
-    "AVOC": "avocado",
-    "TOM": "tomato",
-    "POT": "potato",
-    "ONIN": "onion",
-    "GRLC": "garlic",
-    "LETT": "lettuce",
-    "SPNCH": "spinach",
-    "BRCC": "broccoli",
-    "CRRT": "carrot",
-    "CRT": "carrot",
-    "CUC": "cucumber",
-    "MUSH": "mushrooms",
-    "PEPR": "bell pepper",
-    "CELRY": "celery",
-    "CRN": "corn",
-    "PEAS": "peas",
-    "BNS": "beans",
-    "CHKN": "chicken",
-    "BEEF": "beef",
-    "PORK": "pork",
-    "TURKY": "turkey",
-    "BACN": "bacon",
-    "HAM": "ham",
-    "SAUS": "sausage",
-    "SALMN": "salmon",
-    "TUNA": "tuna",
-    "SHRMP": "shrimp",
-    "EGGS": "eggs",
-    "MLK": "milk",
-    "SKIMMLK": "skim milk",
-    "SKMMLK": "skim milk",
-    "WHLMLK": "whole milk",
-    "CRM": "cream",
-    "YOG": "yogurt",
-    "CHZ": "cheese",
-    "BTR": "butter",
-    "BRD": "bread",
-    "BAGEL": "bagel",
-    "TORT": "tortillas",
-    "RICE": "rice",
-    "PASTA": "pasta",
-    "NOOD": "noodles",
-    "OATS": "oats",
-    "CRL": "cereal",
-    "FLOUR": "flour",
-    "SUG": "sugar",
-    "SALT": "salt",
-    "PEPRN": "pepper (black)",
-    "OIL": "cooking oil",
-    "OLIVOIL": "olive oil",
-    "VIN": "vinegar",
-    "KETCH": "ketchup",
-    "MAYO": "mayonnaise",
-    "MUST": "mustard",
-    "SALSA": "salsa",
-    "SOUP": "soup",
-    "CHPS": "chips",
-    "CRKRS": "crackers",
-    "NUTS": "nuts",
-    "CHOC": "chocolate",
-    "ICECRM": "ice cream",
-    "SDA": "soda",
-    "JCE": "juice",
-    "WTR": "water",
-    "COF": "coffee",
-    "TEA": "tea",
-}
+def main(IMAGE_PATH):
+    API_KEY = "K82519318188957" #TODO obscure w/ a hash and decode on runtime
+    FOOD_ABBR = {
+        "APPL": "apple",
+        "APL": "apple",
+        "BANA": "banana",
+        "BNA": "banana",
+        "ORNG": "orange",
+        "GRAP": "grapes",
+        "STRWB": "strawberry",
+        "BLUBRY": "blueberries",
+        "LMN": "lemon",
+        "LIME": "lime",
+        "AVOC": "avocado",
+        "TOM": "tomato",
+        "POT": "potato",
+        "ONIN": "onion",
+        "GRLC": "garlic",
+        "LETT": "lettuce",
+        "SPNCH": "spinach",
+        "BRCC": "broccoli",
+        "CRRT": "carrot",
+        "CRT": "carrot",
+        "CUC": "cucumber",
+        "MUSH": "mushrooms",
+        "PEPR": "bell pepper",
+        "CELRY": "celery",
+        "CRN": "corn",
+        "PEAS": "peas",
+        "BNS": "beans",
+        "CHKN": "chicken",
+        "BEEF": "beef",
+        "PORK": "pork",
+        "TURKY": "turkey",
+        "BACN": "bacon",
+        "HAM": "ham",
+        "SAUS": "sausage",
+        "SALMN": "salmon",
+        "TUNA": "tuna",
+        "SHRMP": "shrimp",
+        "EGGS": "eggs",
+        "MLK": "milk",
+        "SKIMMLK": "skim milk",
+        "SKMMLK": "skim milk",
+        "WHLMLK": "whole milk",
+        "CRM": "cream",
+        "YOG": "yogurt",
+        "CHZ": "cheese",
+        "BTR": "butter",
+        "BRD": "bread",
+        "BAGEL": "bagel",
+        "TORT": "tortillas",
+        "RICE": "rice",
+        "PASTA": "pasta",
+        "NOOD": "noodles",
+        "OATS": "oats",
+        "CRL": "cereal",
+        "FLOUR": "flour",
+        "SUG": "sugar",
+        "SALT": "salt",
+        "PEPRN": "pepper (black)",
+        "OIL": "cooking oil",
+        "OLIVOIL": "olive oil",
+        "VIN": "vinegar",
+        "KETCH": "ketchup",
+        "MAYO": "mayonnaise",
+        "MUST": "mustard",
+        "SALSA": "salsa",
+        "SOUP": "soup",
+        "CHPS": "chips",
+        "CRKRS": "crackers",
+        "NUTS": "nuts",
+        "CHOC": "chocolate",
+        "ICECRM": "ice cream",
+        "SDA": "soda",
+        "JCE": "juice",
+        "WTR": "water",
+        "COF": "coffee",
+        "TEA": "tea",
+    }
+    url = "https://api.ocr.space/parse/image"
 
-IMAGE_PATH = r"./100Rec.jpeg"
+    payload = {
+        "apikey": API_KEY,
+        "language": "eng",
+        "isOverlayRequired": False,
+        # optional helpers for receipts:
+        "isTable": True,               # “receipt/table-like” output
+        "detectOrientation": True,     # auto-rotate if needed
+        "scale": True,                # upscale low DPI images
+        "OCREngine": 2,               # try engine 2
+    }
 
-url = "https://api.ocr.space/parse/image"
+    with open(IMAGE_PATH, "rb") as f:
+        r = requests.post(url, files={"file": f}, data=payload, timeout=120)
 
-payload = {
-    "apikey": API_KEY,
-    "language": "eng",
-    "isOverlayRequired": False,
-    # optional helpers for receipts:
-    "isTable": True,               # “receipt/table-like” output
-    "detectOrientation": True,     # auto-rotate if needed
-    "scale": True,                # upscale low DPI images
-    "OCREngine": 2,               # try engine 2
-}
+    r.raise_for_status()
+    data = r.json()
 
-with open(IMAGE_PATH, "rb") as f:
-    r = requests.post(url, files={"file": f}, data=payload, timeout=120)
+    # Extract text
+    parsed = data["ParsedResults"][0]["ParsedText"] if data.get("ParsedResults") else ""
+    #print(parsed) #og receipt
 
-r.raise_for_status()
-data = r.json()
+    # Debug errors
+    if data.get("IsErroredOnProcessing"):
+        print("Errors:", data.get("ErrorMessage"))
 
-# Extract text
-parsed = data["ParsedResults"][0]["ParsedText"] if data.get("ParsedResults") else ""
-print(parsed) #og receipt
+    parsed = re.sub(r'.\d\d', '}', parsed)
+    parsed = parsed.split('}')
+    for idx, item in enumerate(parsed):
+        if "subtotal" in item.lower():
+            parsed = parsed[:idx]
+            break
+    parsed = [re.sub(r'\d+', '', i) for i in parsed]
+    parsed = [item.strip() for item in parsed if item.strip() != ""]  # strips whitespace and removes empty items
+    parsed = [i.upper() for i in parsed]
 
-# Debug errors
-if data.get("IsErroredOnProcessing"):
-    print("Errors:", data.get("ErrorMessage"))
+    for current_abr in FOOD_ABBR:
+        for i in range(len(parsed)):
+            if current_abr in parsed[i]:
+                parsed[i]=parsed[i].replace(current_abr,FOOD_ABBR[current_abr])
+    #print(parsed)
+    food_file = open("food price FINAL(food price FINAL).csv", 'r')
+    food_list = []
+    for food in food_file:
+        current_food = food.strip().split(",")
+        food_list.append(current_food)
+    #print(food_list)
+    carbon_list = []
+    receipt = parsed
 
 
-#for i in range(len(parsed)): # removes all numbers
-#    
-#    if "." in parsed[i]:
-#        parsed[i] = parsed[i].replace(".","")
-#    if parsed[i].isnumeric():
-#        parsed[i] = ""
-    # checkUpper = parsed[i].upper()
-    # if checkUpper == parsed[i]:
-    #     parsed[i] = ""
-parsed = re.sub(r'.\d\d', '}', parsed)
-parsed = parsed.split('}')
-for idx, item in enumerate(parsed):
-    if "subtotal" in item.lower():
-        parsed = parsed[:idx]
-        break
-parsed = [re.sub(r'\d+', '', i).upper() for i in parsed]
-parsed = [item.strip() for item in parsed if item.strip() != ""]  # strips whitespace and removes empty items
-
-for current_abr in FOOD_ABBR:
-    for i in range(len(parsed)):
-        if current_abr in parsed[i]:
-            parsed[i]=parsed[i].replace(current_abr,FOOD_ABBR[current_abr])
-
-print(parsed)
-food_file = open("food price FINAL(food price FINAL).csv", 'r')
-food_list = []
-for food in food_file:
-    current_food = food.strip().split(",")
-    food_list.append(current_food)
-
-carbon_list = []
-receipt = parsed
-for camera_food in receipt:
-    for i in range(len(food_list)):
-        if food_list[i][0] == camera_food:
-            food_carbon = [food_list[i][0], food_list[i][2]]
-            carbon_list.append(food_carbon)
-print(carbon_list)
+    for food in food_list:
+        for word in receipt:
+            if food[0].lower() in word.lower():
+                carbon_list.append([food[0], food[2]])
+    
+    return carbon_list
