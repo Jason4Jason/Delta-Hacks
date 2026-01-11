@@ -1,0 +1,17 @@
+{
+  "fonts": {
+    "primary": "Saira",
+    "heading": "Roboto",
+    "mono": "JetBrains Mono"
+  },
+  "theme": {
+    "defaultTheme": "green"
+  },
+  "branding": {
+    "appName": "Carbon Emission Chat Bot",
+    "appTitle": "Carbon Emission Chat Bot",
+    "storagePrefix": "carbon-emission-chat-bot-chat",
+    "exportPrefix": "CarbonEmissionChatBot",
+    "logo": "/assets/logo.png"
+  }
+}
