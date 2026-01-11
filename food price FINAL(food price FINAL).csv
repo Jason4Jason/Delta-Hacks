@@ -64,9 +64,9 @@ Frozen strawberries,600,0.9
 Frozen strawberry,600,0.9
 White bread,675,1.1
 Flatbread and pita,500,0.9
-Crackers and crisp bread,200,0.7
-Cookies and sweet biscuit,300,1.2
-Dry or fresh pasta,500,0.8
+Crackers,200,0.7
+Cookie,300,1.2
+pasta,500,0.8
 Brown rice,900,2.25
 White rice,2000,5
 Cereal,400,1.2
@@ -74,7 +74,7 @@ Wheat flour,2500,2.5
 White sugar,2000,1.6
 Apple juice,2000,1.2
 Orange juice,2000,1.6
-Roasted or ground coffee,340,5.5
+coffee,340,5.5
 Tea,20,0.2
 Ketchup,1000,1.8
 Vegetable oil,3000,8.1
@@ -92,7 +92,7 @@ Canned corn,341,0.7
 Canned peach,398,0.8
 Canned pear,398,0.8
 Dried lentil,900,0.8
-Dry bean and legume,900,0.9
+Dry bean,900,0.9
 Tofu,350,0.7
 Hummus,227,0.6
 Salsa,418,0.6
@@ -101,3 +101,6 @@ Salad dressing,475,1.1
 Almond,200,1
 Peanut,450,0.9
 Sunflower seed,400,0.7
+legume,900,0.9
+sweet biscuit,300,1.2
+crisp bread,200,0.7
