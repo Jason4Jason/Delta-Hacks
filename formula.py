@@ -1,5 +1,5 @@
 import requests
-
+import re
 API_KEY = "K82519318188957" #TODO obscure w/ a hash and decode on runtime
 FOOD_ABBR = {
     "APPL": "apple",
@@ -80,7 +80,7 @@ FOOD_ABBR = {
     "TEA": "tea",
 }
 
-IMAGE_PATH = r"C:\Users\Marcus\Documents\GitHub\Delta-Hacks\100Rec.jpeg"
+IMAGE_PATH = r"./100Rec.jpeg"
 
 url = "https://api.ocr.space/parse/image"
 
@@ -103,26 +103,30 @@ data = r.json()
 
 # Extract text
 parsed = data["ParsedResults"][0]["ParsedText"] if data.get("ParsedResults") else ""
-print(parsed)
+print(parsed) #og receipt
 
 # Debug errors
 if data.get("IsErroredOnProcessing"):
     print("Errors:", data.get("ErrorMessage"))
 
-parsed = parsed.split()
-for i in range(len(parsed)): # removes all numbers
-    if "." in parsed[i]:
-        parsed[i] = parsed[i].replace(".","")
-    if parsed[i].isnumeric():
-        parsed[i] = ""
+
+#for i in range(len(parsed)): # removes all numbers
+#    
+#    if "." in parsed[i]:
+#        parsed[i] = parsed[i].replace(".","")
+#    if parsed[i].isnumeric():
+#        parsed[i] = ""
     # checkUpper = parsed[i].upper()
     # if checkUpper == parsed[i]:
     #     parsed[i] = ""
-
-parsed = list(filter(lambda a: a != "", parsed)) #removes empty items
-
-for i in range(len(parsed)):
-    parsed[i] = parsed[i].upper() #capitalizes everything for consistency
+parsed = re.sub(r'.\d\d', '}', parsed)
+parsed = parsed.split('}')
+for idx, item in enumerate(parsed):
+    if "subtotal" in item.lower():
+        parsed = parsed[:idx]
+        break
+parsed = [re.sub(r'\d+', '', i).upper() for i in parsed]
+parsed = [item.strip() for item in parsed if item.strip() != ""]  # strips whitespace and removes empty items
 
 for current_abr in FOOD_ABBR:
     for i in range(len(parsed)):
