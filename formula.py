@@ -141,10 +141,19 @@ def analyze_receipt_image(IMAGE_PATH):
     receipt = parsed
 
 
+    # Track words we've already added and their max CO2 value
+    word_to_co2 = {}
     for food in food_list:
         for word in receipt:
             if food[0].lower() in word.lower():
-                carbon_list.append([word, food[2]])
+                current_co2 = float(food[2])
+                if word in word_to_co2:
+                    # If duplicate, store the maximum CO2 value
+                    word_to_co2[word] = max(word_to_co2[word], current_co2)
+                else:
+                    word_to_co2[word] = current_co2
+    for word, co2 in word_to_co2.items():
+        carbon_list.append([word, str(co2)])
     
     
     

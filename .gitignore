@@ -39,3 +39,4 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts   
 
+__pycache__/formula.cpython-312.pyc
