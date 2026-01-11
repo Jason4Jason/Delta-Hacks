@@ -80,7 +80,7 @@ FOOD_ABBR = {
     "TEA": "tea",
 }
 
-IMAGE_PATH = r"C:\Users\Marcus\Downloads\100Rec.jpeg"
+IMAGE_PATH = r"C:\Users\Student\Downloads\test2.png"
 
 url = "https://api.ocr.space/parse/image"
 
@@ -103,26 +103,23 @@ data = r.json()
 
 # Extract text
 parsed = data["ParsedResults"][0]["ParsedText"] if data.get("ParsedResults") else ""
-print(parsed)
+# print(parsed)
 
 # Debug errors
 if data.get("IsErroredOnProcessing"):
     print("Errors:", data.get("ErrorMessage"))
 
 parsed = parsed.split()
-for i in range(len(parsed)): # removes all numbers
-    if "." in parsed[i]:
-        parsed[i] = parsed[i].replace(".","")
-    if parsed[i].isnumeric():
+parsed = parsed[parsed.index("Amount")+1:parsed.index("Subtotal")]
+for i in range(len(parsed)):
+    checkUpper = parsed[i].upper()
+    if checkUpper == parsed[i]:
         parsed[i] = ""
-    # checkUpper = parsed[i].upper()
-    # if checkUpper == parsed[i]:
-    #     parsed[i] = ""
 
-parsed = list(filter(lambda a: a != "", parsed)) #removes empty items
+parsed = list(filter(lambda a: a != "", parsed))
 
 for i in range(len(parsed)):
-    parsed[i] = parsed[i].upper() #capitalizes everything for consistency
+    parsed[i] = parsed[i].upper()
 
 for current_abr in FOOD_ABBR:
     for i in range(len(parsed)):
@@ -130,17 +127,3 @@ for current_abr in FOOD_ABBR:
             parsed[i]=parsed[i].replace(current_abr,FOOD_ABBR[current_abr])
 
 print(parsed)
-food_file = open("food price FINAL(food price FINAL).csv", 'r')
-food_list = []
-for food in food_file:
-    current_food = food.strip().split(",")
-    food_list.append(current_food)
-
-carbon_list = []
-receipt = parsed
-for camera_food in receipt:
-    for i in range(len(food_list)):
-        if food_list[i][0] == camera_food:
-            food_carbon = [food_list[i][0], food_list[i][2]]
-            carbon_list.append(food_carbon)
-print(carbon_list)
