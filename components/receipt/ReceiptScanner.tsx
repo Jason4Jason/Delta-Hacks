@@ -111,9 +111,12 @@ export function ReceiptScanner() {
   const processReceipt = async (imageData: string) => {
     setIsLoading(true);
     
+    // Use environment variable for backend URL, fallback to localhost for development
+    const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:5000";
+    
     try {
       // Send to Flask backend
-      const response = await fetch("http://localhost:5000/api/analyze-receipt", {
+      const response = await fetch(`${backendUrl}/api/analyze-receipt`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -150,8 +153,6 @@ export function ReceiptScanner() {
       { name: "Eggs (12 pack)", quantity: 1, co2: 1.6 },
       { name: "Bread Loaf", quantity: 1, co2: 0.8 },
     ],
-    totalCO2: 25.28,
-    comparison: "Equivalent to driving 102 km in a car",
   });
 
   const reset = () => {
