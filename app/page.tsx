@@ -2,15 +2,16 @@
 
 import { useEffect, useState } from "react";
 import DynamicChat from "../components/chat/DynamicChat";
-import { getChatType, getWidgetConfig } from "../lib/chat-config";
+import { getWidgetConfig } from "../lib/chat-config";
 import { useIsMobile } from "../hooks/use-mobile";
+import { ReceiptScanner } from "@/components/receipt";
 
 export default function Home() {
-  const [chatType, setChatType] = useState<'widget' | 'interface' | null>(null);
+  const [mounted, setMounted] = useState(false);
   const isMobile = useIsMobile();
 
   useEffect(() => {
-    setChatType(getChatType());
+    setMounted(true);
   }, []);
 
   // Get widget configuration for positioning
@@ -55,28 +56,31 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      <main className="container mx-auto py-4 sm:py-6 lg:py-8">
-        
-        {/* Dynamic Chat - Renders widget or interface based on config */}
-        {chatType === 'widget' ? (
-          // Widget mode - position in corner with mobile-friendly positioning
-          <div 
-            className="fixed z-[1000] safe-area-bottom safe-area-right"
-            style={{
-              ...getWidgetPositionStyles(),
-              zIndex: widgetConfig.zIndex
-            }}
-          >
-            <DynamicChat />
-          </div>
-        ) : (
-          // Interface mode - responsive centered layout
-          <div className="w-full max-w-7xl mx-auto px-2 sm:px-4">
-            <DynamicChat />
-          </div>
-        )}
+    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-teal-50 dark:from-stone-950 dark:via-stone-900 dark:to-emerald-950">
+      {/* Decorative background elements */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-emerald-400/20 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 -left-40 w-96 h-96 bg-teal-400/10 rounded-full blur-3xl" />
+        <div className="absolute -bottom-40 right-1/4 w-80 h-80 bg-cyan-400/10 rounded-full blur-3xl" />
+      </div>
+
+      {/* Main Content - Receipt Scanner App */}
+      <main className="relative container mx-auto px-4 py-8 sm:py-12 lg:py-16">
+        <ReceiptScanner />
       </main>
+
+      {/* Chat Widget - Fixed in corner */}
+      {mounted && (
+        <div 
+          className="fixed z-[1000] safe-area-bottom safe-area-right"
+          style={{
+            ...getWidgetPositionStyles(),
+            zIndex: widgetConfig.zIndex
+          }}
+        >
+          <DynamicChat />
+        </div>
+      )}
     </div>
   );
 }
