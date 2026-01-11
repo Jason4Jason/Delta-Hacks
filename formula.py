@@ -125,7 +125,7 @@ def analyze_receipt_image(IMAGE_PATH):
 
     for current_abr in FOOD_ABBR:
         for i in range(len(parsed)):
-            if current_abr in parsed[i]:
+            if current_abr in parsed[i] and not FOOD_ABBR[current_abr].upper() in parsed[i].upper():
                 parsed[i]=parsed[i].replace(current_abr,FOOD_ABBR[current_abr])
     #print(parsed)
     # Get the directory where this script is located
@@ -144,6 +144,8 @@ def analyze_receipt_image(IMAGE_PATH):
     for food in food_list:
         for word in receipt:
             if food[0].lower() in word.lower():
-                carbon_list.append([food[0], food[2]])
+                carbon_list.append([word, food[2]])
+    
+    
     
     return carbon_list

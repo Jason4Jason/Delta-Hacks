@@ -114,6 +114,8 @@ export function ReceiptScanner() {
     // Use environment variable for backend URL, fallback to localhost for development
     const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:5000";
     
+    console.log("Backend URL:", backendUrl); // Debug log
+    
     try {
       // Send to Flask backend
       const response = await fetch(`${backendUrl}/api/analyze-receipt`, {
@@ -124,10 +126,15 @@ export function ReceiptScanner() {
         body: JSON.stringify({ image: imageData }),
       });
 
+      console.log("Response status:", response.status); // Debug log
+
       if (response.ok) {
         const data = await response.json();
+        console.log("Backend response:", data); // Debug log
         setReceiptData(data);
       } else {
+        const errorText = await response.text();
+        console.error("Backend error:", response.status, errorText); // Debug log
         // Fallback mock data if backend fails
         setReceiptData(getMockData());
       }
