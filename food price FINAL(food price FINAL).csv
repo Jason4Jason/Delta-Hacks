@@ -11,12 +11,12 @@ Chicken breasts,900,5.4
 Chicken thigh,800,4.8
 Chicken drumsticks,900,5.4
 Bacon,500,6
-Wieners,400,4.8
+Wiener,400,4.8
 Salmon,1000,11
 Shrimp,300,8.4
 Canned salmon,213,2.3
 Canned tuna,170,1.8
-Meatless burgers,226,0.9
+Meatless burger,226,0.9
 Milk ,4000,5.2
 Soy milk,1890,1.1
 Nut milk,1890,0.8
@@ -25,47 +25,47 @@ Butter,454,10.5
 Margarine,907,2.5
 Block cheese,500,6.5
 Yogurt,500,1.2
-Eggs,12,2.4
-Apples,1500,0.45
-Oranges,2000,0.8
-Oranges,1360,0.54
-Bananas,1200,0.96
-Pears,1500,0.45
-Lemons,1000,0.6
-Limes,500,0.3
-Grapes,500,0.75
+Egg,12,2.4
+Apple,1500,0.45
+Orange,1360,0.54
+Banana,1200,0.96
+Pear,1500,0.45
+Lemon,1000,0.6
+Lime,500,0.3
+Grape,500,0.75
 Cantaloupe,1000,0.5
+Strawberry,454,0.8
 Strawberries,454,0.8
 Avocado,500,1.25
-Potatoes,2000,0.6
-Sweet potatoes,2000,0.7
-Tomatoes,1000,1.1
+Potato,2000,0.6
+Sweet potato,2000,0.7
+Tomato,1000,1.1
 Cabbage,1500,0.45
-Carrots,1360,0.4
-Onions,1000,0.5
-Onions,1360,0.68
+Carrot,1360,0.4
+Onion,1360,0.68
 Celery,1000,0.5
 Cucumber,500,0.35
 Mushrooms,227,0.7
 Iceberg lettuce,600,0.75
 Romaine lettuce,400,0.6
 Broccoli,400,0.5
-Peppers,600,0.9
+Pepper,600,0.9
 Squash,1000,0.6
-Salad greens,142,0.5
-Frozen french fried potatoes,750,1.5
-Frozen green beans,750,0.75
+Salad green,142,0.5
+Frozen french fried potato,750,1.5
+Frozen green bean,750,0.75
 Frozen broccoli,500,0.6
 Frozen corn,750,0.75
-Frozen mixed vegetables,750,0.8
-Frozen peas,750,0.75
+Frozen mixed vegetable,750,0.8
+Frozen pea,750,0.75
 Frozen pizza,390,1.3
 Frozen spinach,300,0.4
 Frozen strawberries,600,0.9
+Frozen strawberry,600,0.9
 White bread,675,1.1
 Flatbread and pita,500,0.9
-Crackers and crisp breads,200,0.7
-Cookies and sweet biscuits,300,1.2
+Crackers and crisp bread,200,0.7
+Cookies and sweet biscuit,300,1.2
 Dry or fresh pasta,500,0.8
 Brown rice,900,2.25
 White rice,2000,5
@@ -84,20 +84,20 @@ Baby food,128,0.3
 Infant formula,900,6.5
 Peanut butter,1000,2.5
 Mayonnaise,890,3.2
-Canned baked beans,398,0.8
-Canned tomatoes,796,1.1
+Canned baked bean,398,0.8
+Canned tomato,796,1.1
 Canned soup,284,0.9
-Canned beans and lentils,540,1.1
+Canned bean and lentil,540,1.1
 Canned corn,341,0.7
 Canned peach,398,0.8
 Canned pear,398,0.8
-Dried lentils,900,0.8
-Dry beans and legumes,900,0.9
+Dried lentil,900,0.8
+Dry bean and legume,900,0.9
 Tofu,350,0.7
 Hummus,227,0.6
 Salsa,418,0.6
 Pasta sauce,650,0.9
 Salad dressing,475,1.1
-Almonds,200,1
-Peanuts,450,0.9
-Sunflower seeds,400,0.7
+Almond,200,1
+Peanut,450,0.9
+Sunflower seed,400,0.7
